@@ -9,4 +9,7 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install -j$(nproc) gd \
     && docker-php-ext-install mysql mysqli pdo_mysql \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
-    && echo "*/2 * * * * /usr/local/bin/php /var/www/html/phpcms/modules/remotedata/pi.php vegetables dailay > /dev/null 2>&1" > /var/spool/cron/crontabs/root
+    && update-rc.d cron defaults \
+    && echo "* * * * * /usr/local/bin/php /var/www/html/phpcms/modules/remotedata/pi.php vegetables dailay > /dev/null 2>&1" > /var/spool/cron/crontabs/root \
+    && crontab /var/spool/cron/crontabs/root
+    
