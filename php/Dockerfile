@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     && mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
     && update-rc.d cron defaults \
     && echo "* * * * * /usr/local/bin/php /var/www/html/phpcms/modules/remotedata/pi.php vegetables dailay > /dev/null 2>&1" > /var/spool/cron/crontabs/root \
-    && crontab /var/spool/cron/crontabs/root
-    && /etc/init.d/cron start
+    && crontab /var/spool/cron/crontabs/root \
+    && /etc/init.d/cron start \
     && update-rc.d cron enable
     
